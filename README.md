@@ -1,71 +1,80 @@
+# Chatbot Informativo – Instituto Superior N.º 57 “Juana Paula Manso”
 
-# Chatbot Informativo - Instituto Superior N°57 "Juana P. Manso"
+Este chatbot interactivo en consola, desarrollado en Python, permite a los usuarios acceder de manera ágil y amigable a toda la información relevante del Instituto Superior N.º 57 “Juana Paula Manso”.  
+Entre sus funciones, brinda detalles sobre la oferta académica, requisitos de inscripción, modalidades de cursada, datos de contacto, redes sociales y más.
 
-Chatbot interactivo en consola desarrollado en Python que permite a los usuarios consultar la oferta académica, requisitos, contacto, modalidad de cursada, redes sociales y más del Instituto Superior N°57 "Juana P. Manso".
+## 📝 Descripción
 
-## Descripción
+El chatbot ofrece una interfaz interactiva por consola que permite a los usuarios explorar de manera clara y ordenada la información institucional del Instituto Superior N.º 57.  
+Su estructura basada en menús facilita la navegación y el acceso a cada sección, integrando validaciones básicas para una experiencia más robusta.
 
-Este programa ofrece un menú interactivo por consola para que los usuarios puedan navegar fácilmente por la información institucional. Cuenta con validaciones básicas y funciones organizadas para cada sección, facilitando la consulta rápida y amigable de:
+A través del sistema, los usuarios pueden consultar:
 
-- Carreras disponibles y sus detalles.
-- Duración, modalidad e inscripción de las carreras.
-- Información de contacto del instituto.
-- Requisitos de inscripción.
-- Redes sociales y página web.
-- Información sobre especialización en Enfermería en Salud Mental.
+- La oferta académica disponible y los detalles de cada carrera.
+- Modalidad de cursada, duración y períodos de inscripción.
+- Datos de contacto institucional y ubicación.
+- Requisitos necesarios para inscribirse.
+- Redes sociales oficiales y sitio web.
+- Información específica sobre la especialización en Enfermería en Salud Mental.
 
-## Características principales
+## ⚙️ Características principales
 
-- Limpieza automática de pantalla según sistema operativo.
-- Validación de nombre con soporte para letras acentuadas y ñ.
-- Uso de colores en la consola con `colorama` para mejor experiencia visual.
-- Navegación sencilla mediante menús numerados.
-- Funciones modulares para fácil mantenimiento y ampliación.
+- Limpieza automática de pantalla, adaptada al sistema operativo (Windows/Linux).
+- Validación de nombre y apellido con soporte para caracteres especiales (tildes, ñ, etc.).
+- Interfaz visual mejorada mediante el uso de colores en consola con la librería `colorama`.
+- Menús numerados e intuitivos que facilitan la navegación del usuario.
+- Estructura modular con funciones separadas, lo que permite un mantenimiento sencillo y una ampliación escalable del sistema.
 
-## Requisitos
+## 📦 Requisitos
 
-- Python 3.6 o superior
-- Paquete `colorama`
-- Paquete `tkinter`
+Para ejecutar correctamente el chatbot, es necesario contar con lo siguiente:
 
-Puedes instalar la dependencia con:
+- Python 3.6 o superior instalado.
+- Paquete `colorama` para el uso de colores en consola.
+
+Para instalar la dependencia externa, ejecutá:
 
 ```bash
 pip install colorama
 ```
 
-## Uso
+## ▶️ Uso
 
-Clona o descarga este repositorio.
-Asegúrate de tener Python instalado y la librería colorama.
+1. Cloná o descargá este repositorio en tu equipo.
+2. Asegurate de tener Python instalado y el paquete `colorama` correctamente configurado.
+3. Accedé a la carpeta del proyecto desde la terminal o consola.
 
-### Ejecuta el chatbot
+### Ejecutar el chatbot
+
+En la terminal, ejecutá el siguiente comando:
 
 ```bash
 python chatbot_consola.py
 ```
 
-Sigue las indicaciones en pantalla para navegar por las opciones del menú.
-
-## Estructura del proyecto
+## 🗂️ Estructura del proyecto   
 
 - chatbot_consola.py: Código principal del chatbot.
-
 - datos.py: Archivo con los datos estáticos del instituto (carreras, contacto, requisitos).
 
-## Contribuciones
+## 🤝 Contribuciones
 
-Las contribuciones son bienvenidas. Para proponer mejoras o reportar errores, por favor abre un issue o pull request.
+Las contribuciones al proyecto son bienvenidas.  
+Si deseas proponer mejoras, corregir errores o agregar nuevas funcionalidades, podés hacerlo mediante un **issue** o abriendo un **pull request** en este repositorio.
 
-## Licencia
+Toda sugerencia será valorada para continuar mejorando la herramienta.
 
-Este proyecto es libre para uso educativo y sin fines comerciales.
+## 📄 Licencia
 
-### Desarrollado por Grupo 8
+Este proyecto fue desarrollado con fines educativos y se encuentra disponible para su uso, distribución o adaptación **sin fines comerciales**.
 
-integrantes:
+---
 
-- elias campos
-- agustin lezcano
-- alejandro olivera
-- carlos olivera
+## 👨‍💻 Desarrollado por el Grupo 8
+
+**Integrantes:**
+
+- Elías Campos
+- Agustín Lezcano
+- Alejandro Olivera
+- Carlos Olivera
