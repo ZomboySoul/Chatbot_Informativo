@@ -1,0 +1,141 @@
+
+# 📋 Changelog - Chatbot Informativo Instituto 57
+
+## ✅ 1. Separación de funciones por opción del menú
+
+Se dividió la lógica del `main()` en funciones independientes para mejorar organización, lectura y mantenimiento:
+
+- `carreras()`: Maneja la lógica para mostrar carreras y sus detalles.
+- `modalidad()`: Muestra la duración y modalidad de todas las carreras.
+- `contacto()`: Muestra los datos de contacto institucional.
+- `requisitos()`: Muestra la lista de requisitos para la inscripción.
+- `redes()`: Muestra las redes sociales y sitio web.
+- `especializacion()`: Muestra el detalle de la carrera de especialización en Enfermería en Salud Mental.
+- `despedida()`: Muestra un mensaje de salida del programa.
+- `mostrar_bienvenida()`: Muestra la bienvenida al usuario.
+
+---
+
+## ✅ 2. Refactorización del `main()`
+
+El `main()` fue simplificado y reescrito para delegar tareas a las nuevas funciones.
+
+**Antes:** lógica extensa, con muchas acciones directamente dentro del `main()`.
+**Ahora:** solo gestiona el flujo general y llama a funciones según la opción seleccionada.
+
+Resultado: más limpio, entendible y fácil de mantener.
+
+---
+
+## ✅ 3. Limpieza de estructuras de datos
+
+Se eliminaron comentarios innecesarios en:
+
+- `CARRERAS_INFO`
+- `CONTACTO`
+- `REQUISITOS`
+- Otros bloques de datos
+
+---
+
+## ✅ 4. Pequeñas mejoras generales
+
+- Reemplazo de contadores manuales por `enumerate()`.
+- Mejora en la presentación visual con formato uniforme.
+- Estandarización de nombres de funciones con estilo `snake_case`.
+
+---
+
+## ✅ 5. Estilización con Colorama
+
+Colores aplicados estratégicamente para mejorar la experiencia de uso en consola:
+
+- 🟡 **Amarillo:** Títulos y encabezados.
+- 🔵 **Cian:** Etiquetas como "Duración", "Modalidad", etc.
+- ⚪ **Blanco:** Texto principal (contenido y valores).
+- 🟢 **Verde:** Mensajes de bienvenida y confirmación.
+- 🔴 **Rojo:** Errores o advertencias.
+- ⚫ **Gris claro:** Detalles secundarios.
+- 🟣 **Magenta claro:** Entrada de menú principal.
+
+---
+
+## ✅ 6. Validación de nombre en `mostrar_bienvenida()`
+
+Se agregó validación para asegurar que el usuario ingrese **nombre y apellido válidos**.
+
+### 📌 Criterios
+
+- Al menos dos palabras (nombre + apellido).
+- Solo letras (incluye tildes y ñ/Ñ).
+- No se permiten números ni caracteres especiales.
+
+**Resultado:** experiencia más profesional y sin errores por entradas inválidas.
+
+---
+
+## ✅ 7. Separación de datos estáticos (`datos.py`)
+
+Se creó el archivo `datos.py` para centralizar la información:
+
+- `CARRERAS_INFO`: Detalles de cada carrera.
+- `CONTACTO`: Datos institucionales.
+- `REQUISITOS`: Documentación necesaria para inscripción.
+
+**Importación en el código principal:**
+
+```python
+from datos import CARRERAS_INFO, CONTACTO, REQUISITOS
+```
+
+**Beneficios:**
+
+- Mejor organización del código.
+- Fácil mantenimiento y reutilización futura.
+- Separación clara entre lógica y datos.
+
+---
+
+## ✅ 8. Renombramiento de `main()`
+
+La función `main()` fue renombrada a `iniciar_chatbot()` para reflejar mejor su propósito y seguir buenas prácticas de legibilidad.
+
+---
+
+## ✅ 9. Implementación de `docstring` en todas las funciones
+
+Se agregaron descripciones breves con formato de `docstring` a cada función para explicar su propósito. Esto mejora la documentación interna y permite a terceros entender rápidamente la lógica.
+
+---
+
+## ✅ 10. Refactorización de `carreras()` (antes `opcion_carreras_disponibles()`)
+
+Mejoras realizadas:
+
+- Se extrajo la lista de carreras en `mostrar_lista_carreras()`.
+- Se creó `seleccionar_carrera()` para validar la selección del usuario.
+- Se redujo la longitud de la función principal.
+- Se agregaron `docstrings` claros.
+
+**Objetivo:** facilitar comprensión y mantener el código modular.
+
+---
+
+## ✅ 11. Renombramiento de funciones para mayor claridad
+
+Se eliminaron prefijos innecesarios como `opcion_`, `ver_` o `mostrar_`, ya que el **nombre por sí solo es claro dentro del contexto del menú**.
+
+### Cambios
+
+| Antes                           | Ahora               |
+| ------------------------------- | ------------------- |
+| `opcion_carreras_disponibles()` | `carreras()`        |
+| `opcion_duracion_modalidad()`   | `modalidad()`       |
+| `opcion_especializacion()`      | `especializacion()` |
+| `opcion_contacto()`             | `contacto()`        |
+| `opcion_requisitos()`           | `requisitos()`      |
+| `opcion_redes()`                | `redes()`           |
+
+**Motivación:** hacer el código más fluido, limpio y natural, sin sacrificar comprensión.
+
+---
