@@ -52,10 +52,13 @@ En la terminal, ejecutá el siguiente comando:
 python chatbot_consola.py
 ```
 
-## 🗂️ Estructura del proyecto   
+## 🗂️ Estructura del proyecto
 
-- chatbot_consola.py: Código principal del chatbot.
-- datos.py: Archivo con los datos estáticos del instituto (carreras, contacto, requisitos).
+- **main.py**: Archivo principal que ejecuta el chatbot y coordina el flujo del programa.
+- **interfaz.py**: Maneja la interacción con el usuario (bienvenida, menú, despedida, validación de nombre).
+- **secciones.py**: Contiene las funciones relacionadas a las secciones informativas (carreras, requisitos, contacto, etc.).
+- **utils.py**: Funciones de utilidad general como limpiar pantalla y mostrar títulos.
+- **datos.py**: Archivo con los datos estáticos del instituto (carreras, contacto, requisitos).
 
 ## 🤝 Contribuciones
 
