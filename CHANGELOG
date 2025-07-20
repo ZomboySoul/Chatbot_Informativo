@@ -145,3 +145,15 @@ Se eliminaron prefijos innecesarios como `opcion_`, `ver_` o `mostrar_`, ya que 
 Se reemplazó la estructura de if/elif en el menú principal por un diccionario de funciones (menu_opciones), mejorando la legibilidad y escalabilidad del código.
 
 Se implementó una nueva función validar_nombre(nombre) para encapsular la validación del nombre y apellido ingresado por el usuario, manteniendo limpio y reutilizable el código de bienvenida.
+
+## ✅ 13. Modularización del código
+
+Se reorganizó el proyecto en múltiples archivos .py para mejorar la estructura y mantenibilidad del código:
+
+- main.py: contiene la función principal iniciar_chatbot y controla el flujo general.
+
+- interfaz.py: maneja la interacción con el usuario (bienvenida, menú, despedida y validación de nombre).
+
+- secciones.py: agrupa las funciones correspondientes a cada sección informativa del menú (carreras, requisitos, redes, etc.).
+
+- utils.py: incluye funciones reutilizables como limpiar_pantalla, mostrar_seccion y pausar.
