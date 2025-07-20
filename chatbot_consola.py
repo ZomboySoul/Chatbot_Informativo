@@ -58,6 +58,13 @@ def seleccionar_carrera():
         return "reintentar"
 
 
+def validar_nombre(nombre):
+    """Valida que el nombre ingresado tenga al menos dos palabras y solo contenga letras, espacios y tildes."""
+   
+    patron_nombre = re.compile(r"^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")
+    return len(nombre.split()) >= 2 and patron_nombre.match(nombre)
+
+
 # ========================================================
 # 🧑‍🎓 FUNCIONES RELACIONADAS A LA OFERTA ACADÉMICA
 # ========================================================
@@ -185,15 +192,12 @@ def mostrar_bienvenida():
     print(Fore.CYAN + "'Juana Paula Manso'\n".center(60) + Style.RESET_ALL)
 
     print("-"*25)
-    # Regex: permite letras, tildes, ñ y espacios
-    patron_nombre = re.compile(r"^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")
 
     # Validación de entrada de datos del usuario 
-
     while True:
         nombre = input(Fore.WHITE + "👤 Ingrese su nombre y apellido para comenzar: ").strip().title()
 
-        if len(nombre.split()) >= 2 and patron_nombre.match(nombre):
+        if validar_nombre(nombre):
             break
         else:
             print(Fore.RED + "⚠️ Ingrese nombre y apellido válidos (solo letras y al menos dos palabras)." + Style.RESET_ALL)
@@ -249,27 +253,29 @@ def despedida(nombre_completo):
 def iniciar_chatbot():
     """Controla el flujo general del programa, desde la bienvenida hasta la despedida."""
     
+    menu_opciones = {
+       "1": carrera,
+       "2": modalidad,
+       "3": contacto,
+       "4": requisitos,
+       "5": redes,
+       "6": especializacion,
+       "7": lambda: despedida(nombre_completo)
+    }
+
     nombre_completo = mostrar_bienvenida()
+    
     while True:
         limpiar_pantalla()
         mostrar_menu()
         opcion = input(Fore.LIGHTMAGENTA_EX + "\nIngrese una opción (1-7): " + Fore.RESET).strip()
 
-        if opcion == "1":
-            carrera()
-        elif opcion == "2":
-            modalidad()
-        elif opcion == "3":
-            contacto()
-        elif opcion == "4":
-            requisitos()
-        elif opcion == "5":
-            redes()
-        elif opcion == "6":
-            especializacion()
-        elif opcion == "7":
-            despedida(nombre_completo)
-            return
+        accion = menu_opciones.get(opcion)
+
+        if accion:
+            accion()
+            if opcion == "7":
+                return  # sale del programa
         else:
             print(Fore.RED + "\n⚠️ Opción no válida. Por favor ingrese un número del 1 al 7." + Style.RESET_ALL)
             input("Presione Enter para continuar...")
