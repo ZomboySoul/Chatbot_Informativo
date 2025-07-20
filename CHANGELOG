@@ -139,3 +139,9 @@ Se eliminaron prefijos innecesarios como `opcion_`, `ver_` o `mostrar_`, ya que 
 **Motivación:** hacer el código más fluido, limpio y natural, sin sacrificar comprensión.
 
 ---
+
+## ✅ 12. Mejora del flujo del menú y validación del nombre
+
+Se reemplazó la estructura de if/elif en el menú principal por un diccionario de funciones (menu_opciones), mejorando la legibilidad y escalabilidad del código.
+
+Se implementó una nueva función validar_nombre(nombre) para encapsular la validación del nombre y apellido ingresado por el usuario, manteniendo limpio y reutilizable el código de bienvenida.
