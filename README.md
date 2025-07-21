@@ -49,7 +49,7 @@ pip install colorama
 En la terminal, ejecutá el siguiente comando:
 
 ```bash
-python chatbot_consola.py
+python main.py
 ```
 
 ## 🗂️ Estructura del proyecto
