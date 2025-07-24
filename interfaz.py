@@ -14,7 +14,7 @@ def validar_nombre(nombre):
     """Valida que el nombre ingresado tenga al menos dos palabras y solo contenga letras, espacios y tildes."""
    
     patron_nombre = re.compile(r"^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")
-    return len(nombre.split()) >= 2 and patron_nombre.match(nombre)
+    return len(nombre.split()) >= 2 and patron_nombre.match(nombre) is not None
 
 
 def mostrar_bienvenida():
@@ -37,9 +37,12 @@ def mostrar_bienvenida():
 
     # Validación de entrada de datos del usuario 
     while True:
-        nombre = input(Fore.WHITE + "👤 Ingrese su nombre y apellido para comenzar: ").strip().title()
+        nombre = input(Fore.WHITE + "👤 Ingrese su nombre: ").strip().title()
+        apellido = input(Fore.WHITE + "👤 Ingrese su apellido: ").strip().title()
 
-        if validar_nombre(nombre):
+        nombreCompleto = nombre + " " + apellido
+
+        if validar_nombre(nombreCompleto):
             break
         else:
             print(Fore.RED + "⚠️ Ingrese nombre y apellido válidos (solo letras y al menos dos palabras)." + Style.RESET_ALL)
@@ -48,7 +51,7 @@ def mostrar_bienvenida():
     limpiar_pantalla()
     
     print("")
-    print(Fore.GREEN + f"¡Bienvenido/a, {nombre}!".center(60))
+    print(Fore.GREEN + f"¡Bienvenido/a, {nombreCompleto}!".center(60))
     print(Fore.GREEN + "Gracias por utilizar nuestro chatbot informativo.".center(60))
     print(Fore.GREEN + "Vamos a recorrer juntos la oferta académica 2025.".center(60))
     
