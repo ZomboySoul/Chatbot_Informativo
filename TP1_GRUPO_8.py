@@ -150,9 +150,6 @@ def mostrar_bienvenida():
 
 
 def mostrar_menu():
-    from colorama import Fore
-    from utils import mostrar_seccion
-    
     """Muestra las opciones disponibles del menú principal del sistema."""
 
     mostrar_seccion("INSTITUTO SUPERIOR N°57")
@@ -180,7 +177,6 @@ def despedida(nombre_completo):
     print("")
     print(Fore.RED + f" {nombre_completo.upper()}, GRACIAS POR UTILIZAR NUESTRO SISTEMA ".center(60))
     print(Fore.RED +  " Instituto 57 'Juana P. Manso'\n ".center(60) + Fore.RESET)
-
 
 
 def mostrar_lista_carreras():
@@ -281,7 +277,7 @@ def requisitos():
     print(Fore.CYAN + "Documentación requerida para todas las carreras:\n" + Style.RESET_ALL)
     for i, req in enumerate(REQUISITOS, start=1):
         print(f"{Fore.YELLOW}{i}. {Fore.WHITE}{req}")
-    input(Fore.WHITE + "\nPresione Enter para continuar...")
+    input(Fore.WHITE + "\nPresione Enter para volver al Menu Principal...")
 
 
 def redes():
@@ -301,6 +297,7 @@ def especializacion():
     mostrar_detalle_carrera(CARRERAS_INFO[-1])
     input(Fore.WHITE + "\nPresione Enter para continuar...")
 
+
 def limpiar_pantalla():
     """Limpia la consola dependiendo del sistema operativo."""
 
@@ -313,8 +310,6 @@ def mostrar_seccion(titulo):
     print()
     print(Fore.YELLOW + f"{titulo.upper():^60}")
     print()
-
-
 
 
 def iniciar_chatbot():
