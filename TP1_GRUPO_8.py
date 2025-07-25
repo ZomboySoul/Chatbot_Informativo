@@ -99,6 +99,12 @@ REQUISITOS = [
 ]
 
 
+
+#=========================================
+# 🧩 1. Validación y Entrada de Usuario
+#=========================================
+
+
 def validar_nombre(nombre):
     """Valida que el nombre ingresado tenga al menos dos palabras y solo contenga letras, espacios y tildes."""
    
@@ -149,6 +155,51 @@ def mostrar_bienvenida():
     return nombre
 
 
+def despedida(nombre_completo):
+    """Muestra un mensaje de agradecimiento personalizado al finalizar el sistema."""
+
+    limpiar_pantalla()
+    print("")
+    print(Fore.RED + f" {nombre_completo.upper()}, GRACIAS POR UTILIZAR NUESTRO SISTEMA ".center(60))
+    print(Fore.RED +  " Instituto 57 'Juana P. Manso'\n ".center(60) + Fore.RESET)
+
+
+#=========================================
+# 🗂 2. Control y Flujo del Chatbot
+#=========================================
+
+
+def iniciar_chatbot():
+    """Controla el flujo general del programa, desde la bienvenida hasta la despedida."""
+    
+    menu_opciones = {
+       "1": carrera,
+       "2": modalidad,
+       "3": contacto,
+       "4": requisitos,
+       "5": redes,
+       "6": especializacion,
+       "7": lambda: despedida(nombre_completo)
+    }
+
+    nombre_completo = mostrar_bienvenida()
+    
+    while True:
+        limpiar_pantalla()
+        mostrar_menu()
+        opcion = input(Fore.LIGHTMAGENTA_EX + "\nIngrese una opción (1-7): " + Fore.RESET).strip()
+
+        accion = menu_opciones.get(opcion)
+
+        if accion:
+            accion()
+            if opcion == "7":
+                return  # sale del programa
+        else:
+            print(Fore.RED + "\n⚠️ Opción no válida. Por favor ingrese un número del 1 al 7." + Style.RESET_ALL)
+            input("Presione Enter para continuar...")
+
+
 def mostrar_menu():
     """Muestra las opciones disponibles del menú principal del sistema."""
 
@@ -170,13 +221,28 @@ def mostrar_menu():
     print()
 
 
-def despedida(nombre_completo):
-    """Muestra un mensaje de agradecimiento personalizado al finalizar el sistema."""
+#=========================================
+# 🎓 3. Secciones de Información Académica
+#=========================================
 
-    limpiar_pantalla()
-    print("")
-    print(Fore.RED + f" {nombre_completo.upper()}, GRACIAS POR UTILIZAR NUESTRO SISTEMA ".center(60))
-    print(Fore.RED +  " Instituto 57 'Juana P. Manso'\n ".center(60) + Fore.RESET)
+
+def carrera():
+    """Permite navegar entre las carreras y visualizar más información de cada una."""
+
+    while True:
+        limpiar_pantalla()
+        mostrar_seccion("OFERTA ACADÉMICA 2025")
+        mostrar_lista_carreras()
+        print("\nPresione Enter para volver al menú principal")
+
+        carrera = seleccionar_carrera()
+        if carrera is None:
+            return
+        elif carrera == "reintentar":
+            continue
+        else:
+            mostrar_detalle_carrera(carrera)
+            input(Fore.WHITE + "\nPresione Enter para continuar...")
 
 
 def mostrar_lista_carreras():
@@ -224,25 +290,6 @@ def mostrar_detalle_carrera(carrera):
         print(Fore.GREEN + f" - {materia}" + Style.RESET_ALL)
 
 
-def carrera():
-    """Permite navegar entre las carreras y visualizar más información de cada una."""
-
-    while True:
-        limpiar_pantalla()
-        mostrar_seccion("OFERTA ACADÉMICA 2025")
-        mostrar_lista_carreras()
-        print("\nPresione Enter para volver al menú principal")
-
-        carrera = seleccionar_carrera()
-        if carrera is None:
-            return
-        elif carrera == "reintentar":
-            continue
-        else:
-            mostrar_detalle_carrera(carrera)
-            input(Fore.WHITE + "\nPresione Enter para continuar...")
-
-
 def modalidad():
     """Muestra información general de duración, modalidad e inscripción de todas las carreras."""
 
@@ -256,6 +303,19 @@ def modalidad():
         print(f"{Fore.CYAN}Inscripción: {Fore.WHITE}{carrera['inscripcion']}\n")
     print(Fore.LIGHTBLACK_EX + "* Pendiente de aprobación definitiva para ciclo lectivo 2025")
     input(Fore.WHITE + "\nPresione Enter para continuar...")
+
+
+def especializacion():
+    """Muestra información general de duración, modalidad e inscripción de todas las carreras."""
+
+    limpiar_pantalla()
+    mostrar_detalle_carrera(CARRERAS_INFO[-1])
+    input(Fore.WHITE + "\nPresione Enter para continuar...")
+
+
+#=========================================
+# 📞 4. Secciones Institucionales
+#=========================================
 
 
 def contacto():
@@ -290,12 +350,9 @@ def redes():
     input(Fore.WHITE + "\nPresione Enter para continuar...")
 
 
-def especializacion():
-    """Muestra información general de duración, modalidad e inscripción de todas las carreras."""
-
-    limpiar_pantalla()
-    mostrar_detalle_carrera(CARRERAS_INFO[-1])
-    input(Fore.WHITE + "\nPresione Enter para continuar...")
+#=========================================
+# 🧼 5. Utilidades / Interfaz
+#=========================================
 
 
 def limpiar_pantalla():
@@ -310,37 +367,6 @@ def mostrar_seccion(titulo):
     print()
     print(Fore.YELLOW + f"{titulo.upper():^60}")
     print()
-
-
-def iniciar_chatbot():
-    """Controla el flujo general del programa, desde la bienvenida hasta la despedida."""
-    
-    menu_opciones = {
-       "1": carrera,
-       "2": modalidad,
-       "3": contacto,
-       "4": requisitos,
-       "5": redes,
-       "6": especializacion,
-       "7": lambda: despedida(nombre_completo)
-    }
-
-    nombre_completo = mostrar_bienvenida()
-    
-    while True:
-        limpiar_pantalla()
-        mostrar_menu()
-        opcion = input(Fore.LIGHTMAGENTA_EX + "\nIngrese una opción (1-7): " + Fore.RESET).strip()
-
-        accion = menu_opciones.get(opcion)
-
-        if accion:
-            accion()
-            if opcion == "7":
-                return  # sale del programa
-        else:
-            print(Fore.RED + "\n⚠️ Opción no válida. Por favor ingrese un número del 1 al 7." + Style.RESET_ALL)
-            input("Presione Enter para continuar...")
 
 
 if __name__ == "__main__":
