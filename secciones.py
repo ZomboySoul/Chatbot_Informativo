@@ -4,9 +4,9 @@ secciones.py
 Agrupa todas las funciones asociadas a las distintas secciones informativas del menú,
 como carreras, modalidades, requisitos, contacto, redes sociales y especialización.
 """
-
-
-from utils import limpiar_pantalla, mostrar_seccion
+import time
+import readchar
+from utils import limpiar_pantalla, mostrar_seccion, formatear_parrafo
 from datos import CARRERAS_INFO, CONTACTO, REQUISITOS
 from colorama import Fore, Style
 
@@ -45,87 +45,125 @@ def mostrar_detalle_carrera(carrera):
     
     limpiar_pantalla()
     mostrar_seccion(carrera['nombre'])         
-    print(Fore.CYAN + "📝 Descripción: " +Fore.WHITE + f"{carrera['descripcion']}")
-    print(Fore.CYAN + "⏳ Duración: " +Fore.WHITE + f"{carrera['duracion']}")
-    print(Fore.CYAN + "📅 Período de inscripción: " +Fore.WHITE + f"{carrera['inscripcion']}")
-    print(Fore.CYAN + "🏫 Modalidad: " +Fore.WHITE + f"{carrera['modalidad']}")
-    print(Fore.CYAN + "📋 Requisitos: " +Fore.WHITE + f"{carrera['requisitos']}")
-    print("\n📚 Plan de estudios:" + Style.RESET_ALL)
+
+    print(Fore.CYAN + f"📝 Descripción: {Fore.WHITE}{carrera['descripcion']}")
+    print(Fore.CYAN + f"⏳ Duración: {Fore.WHITE}{carrera['duracion']}")
+    print(Fore.CYAN + f"📅 Inscripción: {Fore.WHITE}{carrera['inscripcion']}")
+    print(Fore.CYAN + f"🏫 Modalidad: {Fore.WHITE}{carrera['modalidad']}")
+    print(Fore.CYAN + f"📋 Requisitos: {Fore.WHITE}{carrera['requisitos']}")
+    print(Fore.CYAN + "\n📚 Plan de estudios:" + Style.RESET_ALL)
 
     for materia in carrera['plan_estudio']:
-        print(Fore.GREEN + f" - {materia}" + Style.RESET_ALL)
+        print(Fore.GREEN + f"   • {materia}")
+
+    print()
 
 
 def carrera():
-    """Permite navegar entre las carreras y visualizar más información de cada una."""
+    """Muestra las carreras una por una, con navegación y toda la información detallada."""
+
+    total = len(CARRERAS_INFO)
+    indice = 0
+
+    limpiar_pantalla()
+    print(Fore.LIGHTBLACK_EX + "Cargando Carreras disponibles", end="", flush=True)
+    for _ in range(3):
+        time.sleep(0.2)
+        print(".", end="", flush=True)
+    time.sleep(0.3)
 
     while True:
         limpiar_pantalla()
-        mostrar_seccion("OFERTA ACADÉMICA 2025")
-        mostrar_lista_carreras()
-        print("\nPresione Enter para volver al menú principal")
 
-        carrera = seleccionar_carrera()
-        if carrera is None:
+        carrera = CARRERAS_INFO[indice]
+
+        # Mostrar detalles
+        print(Fore.CYAN + carrera['nombre'].upper().center(60) + Fore.RESET)
+        print()
+        for linea in formatear_parrafo(carrera['descripcion']):
+            print(Fore.WHITE + linea)
+        print()
+
+        print(Fore.CYAN + f"📅 Inscripción: {Fore.WHITE}{carrera['inscripcion']}")
+        print(Fore.CYAN + f"⏳ Duración: {Fore.WHITE}{carrera['duracion']}")
+        print(Fore.CYAN + f"🏫 Modalidad: {Fore.WHITE}{carrera['modalidad']}")
+        print(Fore.CYAN + f"📋 Requisitos: {Fore.WHITE}{carrera['requisitos']}\n")
+
+        print(Fore.CYAN + "📚 Plan de estudios:")
+        for materia in carrera['plan_estudio']:
+            print(Fore.GREEN + f"   • {materia}")
+
+
+        print()
+        
+        print(Fore.YELLOW + f"← {indice + 1} / {total} →".center(60) + Style.RESET_ALL)
+
+        # Leer tecla
+        tecla = readchar.readkey()
+        if tecla == readchar.key.RIGHT:
+            indice = (indice + 1) % total
+            print(Fore.LIGHTBLACK_EX + "\nCambiando carrera", end="", flush=True)
+            for _ in range(3):
+                time.sleep(0.2)
+                print(".", end="", flush=True)
+            time.sleep(0.2)
+        elif tecla == readchar.key.LEFT:
+            indice = (indice - 1) % total
+            print(Fore.LIGHTBLACK_EX + "\nCambiando carrera", end="", flush=True)
+            for _ in range(3):
+                time.sleep(0.2)
+                print(".", end="", flush=True)
+            time.sleep(0.2)
+        elif tecla == readchar.key.ESC:
             return
-        elif carrera == "reintentar":
-            continue
-        else:
-            mostrar_detalle_carrera(carrera)
-            input(Fore.WHITE + "\nPresione Enter para continuar...")
-
-
-def modalidad():
-    """Muestra información general de duración, modalidad e inscripción de todas las carreras."""
-
-    limpiar_pantalla()
-    mostrar_seccion("DURACIÓN Y MODALIDAD")
-    print(Fore.CYAN + "Todas nuestras carreras:\n" + Style.RESET_ALL)
-    for carrera in CARRERAS_INFO:
-        print(f"{Fore.YELLOW}{carrera['nombre']}")
-        print(f"{Fore.CYAN}Duración: {Fore.WHITE}{carrera['duracion']}")
-        print(f"{Fore.CYAN}Modalidad: {Fore.WHITE}{carrera['modalidad']}")
-        print(f"{Fore.CYAN}Inscripción: {Fore.WHITE}{carrera['inscripcion']}\n")
-    print(Fore.LIGHTBLACK_EX + "* Pendiente de aprobación definitiva para ciclo lectivo 2025")
-    input(Fore.WHITE + "\nPresione Enter para continuar...")
 
 
 def contacto():
-    """Muestra la información de contacto del instituto."""
+    """Muestra la información de contacto del instituto con diseño visual y transición."""
+    limpiar_pantalla()
+
+    print(Fore.LIGHTBLACK_EX + "Cargando información de contacto", end="", flush=True)
+    for _ in range(3):
+        time.sleep(0.2)
+        print(".", end="", flush=True)
+    time.sleep(0.3)
 
     limpiar_pantalla()
     mostrar_seccion("CONTACTO INSTITUCIONAL")
-    print(f"{Fore.CYAN}📍 Dirección: {Fore.WHITE}{CONTACTO['direccion']}")
-    print(f"{Fore.CYAN}📞 Teléfono:  {Fore.WHITE}{CONTACTO['telefono']}")
-    print(f"{Fore.CYAN}✉️  Email:    {Fore.WHITE}{CONTACTO['email']}")
-    print(f"{Fore.CYAN}🌐 Sitio web:{Fore.WHITE} {CONTACTO['web']}")
-    input(Fore.WHITE + "\nPresione Enter para continuar...")
+
+    print(Fore.YELLOW + "📍 Dirección:" + Fore.WHITE, CONTACTO['direccion'])
+    print(Fore.YELLOW + "📞 Teléfono:" + Fore.WHITE, CONTACTO['telefono'])
+    print(Fore.YELLOW + "✉️ Email:" + Fore.WHITE, CONTACTO['email'])
+    print(Fore.YELLOW + "🌐 Sitio Web:" + Fore.CYAN, CONTACTO['web'])
+    print()
+
+    print(Fore.CYAN + "👍 Facebook:" + Fore.WHITE, CONTACTO['redes']['facebook'])
+    print(Fore.CYAN + "📸 Instagram:" + Fore.WHITE, CONTACTO['redes']['instagram'])
+    twitter = CONTACTO['redes'].get('twitter', 'No disponible')
+    print(Fore.CYAN + "🐦 Twitter:" + Fore.WHITE, twitter)
+
+    input(Fore.LIGHTWHITE_EX + "\nPresione Enter para volver al menú...")
 
 
 def requisitos():
-    """Muestra los requisitos de inscripción para las carreras."""
+    """Muestra los requisitos de inscripción con estilo de checklist y transición."""
+    limpiar_pantalla()
+
+    print(Fore.LIGHTBLACK_EX + "Cargando requisitos", end="", flush=True)
+    for _ in range(3):
+        time.sleep(0.2)
+        print(".", end="", flush=True)
+    time.sleep(0.3)
+
     limpiar_pantalla()
     mostrar_seccion("REQUISITOS DE INSCRIPCIÓN")
-    print(Fore.CYAN + "Documentación requerida para todas las carreras:\n" + Style.RESET_ALL)
+
+    print(Fore.YELLOW + "📋 Documentación requerida para todas las carreras:\n" + Style.RESET_ALL)
+
     for i, req in enumerate(REQUISITOS, start=1):
-        print(f"{Fore.YELLOW}{i}. {Fore.WHITE}{req}")
-    input(Fore.WHITE + "\nPresione Enter para continuar...")
+        print(Fore.GREEN + f"✔️  {i}. {Fore.WHITE}{req}")
 
-
-def redes():
-    """Muestra las redes sociales y página web del instituto."""
-    limpiar_pantalla()
-    mostrar_seccion("REDES SOCIALES")
-    print(f"{Fore.CYAN}👍 Facebook:  {Fore.WHITE}{CONTACTO['redes']['facebook']}")
-    print(f"{Fore.CYAN}📸 Instagram: {Fore.WHITE}{CONTACTO['redes']['instagram']}")
-    print(f"{Fore.CYAN}🌐 Página:    {Fore.WHITE}{CONTACTO['web']}")
-    input(Fore.WHITE + "\nPresione Enter para continuar...")
-
-
-def especializacion():
-    """Muestra información general de duración, modalidad e inscripción de todas las carreras."""
-
-    limpiar_pantalla()
-    mostrar_detalle_carrera(CARRERAS_INFO[-1])
-    input(Fore.WHITE + "\nPresione Enter para continuar...")
+    print("\n" + Fore.LIGHTBLACK_EX + "ℹ️  Asegurate de tener todos los documentos en original y copia." + Style.RESET_ALL)
+    
+    input(Fore.LIGHTWHITE_EX + "\nPresione Enter para volver al menú...")
 
