@@ -20,6 +20,14 @@ def mostrar_seccion(titulo):
     """Muestra un título centrado y decorado en pantalla para identificar secciones."""
     
     print()
-    print(Fore.YELLOW + f"{titulo.upper():^60}")
+    print(Fore.YELLOW + f"{'==='} {titulo.upper()} {'==='}".center(60) + Fore.RESET)
     print()
 
+
+def formatear_parrafo(texto, ancho=60):
+    """
+    Devuelve el texto dividido en líneas centradas de un ancho máximo.
+    """
+    import textwrap
+    lineas = textwrap.wrap(texto, width=ancho)
+    return [linea.center(ancho) for linea in lineas]
